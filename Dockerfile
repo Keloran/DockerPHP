@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     libmemcached-dev \
     libpq-dev \
     nodejs \
-    libnotify-bin
+    libnotify-bin \
+    php-amqplib
 
 RUN a2enmod rewrite headers
 
