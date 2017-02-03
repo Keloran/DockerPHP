@@ -21,17 +21,17 @@ RUN docker-php-ext-install \
     mysqli \
     pdo_mysql
 
-RUN curl -OLk http://xdebug.org/files/xdebug-2.4.0.tgz \
-    && tar -zxf xdebug-2.4.0.tgz \
-    && rm -rf xdebug-2.4.0.tgz \
-    && cd xdebug-2.4.0 \
+RUN curl -OLk http://xdebug.org/files/xdebug-2.5.0.tgz \
+    && tar -zxf xdebug-2.5.0.tgz \
+    && rm -rf xdebug-2.5.0.tgz \
+    && cd xdebug-2.5.0 \
     && phpize \
     && ./configure \
     && make \
     && make install \
     && docker-php-ext-enable xdebug
 
-RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-memcached/archive/php7.tar.gz" \
+RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-memcached/archive/v3.0.0.tar.gz" \
     && mkdir -p /usr/src/php/ext/memcached \
     && tar -C /usr/src/php/ext/memcached -zxvf /tmp/memcached.tar.gz --strip 1 \
     && docker-php-ext-configure memcached \
