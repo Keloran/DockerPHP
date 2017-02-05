@@ -12,7 +12,11 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     nodejs \
     libnotify-bin \
-    php-amqplib
+    php-amqplib \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    libpng12-dev
 
 RUN a2enmod rewrite headers
 
@@ -28,8 +32,12 @@ RUN curl -OLk http://xdebug.org/files/xdebug-2.5.0.tgz \
     && phpize \
     && ./configure \
     && make \
-    && make install \
+    && make install \git@github.com:Keloran/DockerPHP.git
     && docker-php-ext-enable xdebug
+
+RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd
 
 RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-memcached/archive/v3.0.0.tar.gz" \
     && mkdir -p /usr/src/php/ext/memcached \
@@ -51,4 +59,3 @@ RUN git clone https://github.com/sass/libsass.git \
     && make \
     && cd sassc \
     && make install
-
