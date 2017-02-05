@@ -32,7 +32,7 @@ RUN curl -OLk http://xdebug.org/files/xdebug-2.5.0.tgz \
     && phpize \
     && ./configure \
     && make \
-    && make install \git@github.com:Keloran/DockerPHP.git
+    && make install \
     && docker-php-ext-enable xdebug
 
 RUN docker-php-ext-install -j$(nproc) iconv mcrypt \
