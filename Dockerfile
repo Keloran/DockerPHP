@@ -1,4 +1,4 @@
-FROM php:7.0-apache
+FROM php:apache
 
 RUN curl -OL https://deb.nodesource.com/setup_6.x \
     && bash setup_6.x
